@@ -29,8 +29,8 @@ ColumnLayout {
     spacing: Style.marginS
 
     NLabel {
-      label: "Vibrance Level"
-      description: "Digital vibrance intensity (0 = default, 1023 = maximum saturation)"
+      label: pluginApi?.tr("settings.vibrance-value") || "Vibrance Level"
+      description: pluginApi?.tr("settings.vibrance-value-desc") || "Digital vibrance intensity (0 = default, 1023 = maximum saturation)"
     }
 
     NSpinBox {
@@ -54,8 +54,8 @@ ColumnLayout {
     spacing: Style.marginS
 
     NLabel {
-      label: "Display Count"
-      description: "Number of displays/ports to apply vibrance to (check nvibrant output)"
+      label: pluginApi?.tr("settings.display-count") || "Display Count"
+      description: pluginApi?.tr("settings.display-count-desc") || "Number of displays/ports to apply vibrance to (check nvibrant output)"
     }
 
     NSpinBox {
