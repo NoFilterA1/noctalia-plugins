@@ -1,0 +1,16 @@
+{
+  "settings": {
+    "enabled": {
+      "label": "Enabled",
+      "desc": "Keep niri's Overview backdrop color synced to the current Noctalia palette."
+    },
+    "targetFile": {
+      "label": "Target file",
+      "desc": "The niri config file this plugin writes the overview block to. It is never merged into your main config.kdl automatically."
+    },
+    "setup": {
+      "title": "One-time setup",
+      "body": "Add this line to your niri config.kdl, then remove any existing 'overview' block from it: include \"{path}\""
+    }
+  }
+}
