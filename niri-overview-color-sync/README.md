@@ -12,6 +12,7 @@ your niri config once — see Setup below.
 ## Features
 
 - **Follows the active palette** — reacts to Noctalia's `mSurface` color, no polling
+- **True black for grayscale wallpapers** — Material's dark-scheme surface tone never reaches pure black, so near-achromatic colors are snapped to `#000000`
 - **Never touches your main config** — writes only to its own dedicated KDL file
 - **Configurable target file** — point it anywhere in your niri config tree
 

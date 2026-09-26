@@ -1,7 +1,7 @@
 {
   "id": "niri-overview-color-sync",
   "name": "Niri Overview Color Sync",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minNoctaliaVersion": "4.6.6",
   "author": "NoFilterA1",
   "license": "MIT",

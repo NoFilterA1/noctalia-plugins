@@ -17,11 +17,22 @@ Item {
     ? root.targetFileSetting.replace("~", root.home)
     : ""
 
+  // Material's dark-scheme surface tone never reaches true black (fixed HCT
+  // tone 6), so a grayscale wallpaper still yields a faint gray instead of
+  // black. Snap near-achromatic colors to pure black to match visually.
+  readonly property real achromaticThreshold: 0.02
+
   function colorToHex(c) {
     function channel(v) {
       var h = Math.round(v * 255).toString(16)
       return h.length === 1 ? "0" + h : h
     }
+
+    var maxc = Math.max(c.r, c.g, c.b)
+    var minc = Math.min(c.r, c.g, c.b)
+    if (maxc - minc < root.achromaticThreshold)
+      return "#000000"
+
     return "#" + channel(c.r) + channel(c.g) + channel(c.b)
   }
 
