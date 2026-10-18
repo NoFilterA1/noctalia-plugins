@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.Commons
+import qs.Commons as NC
 import qs.Widgets
 import qs.Services.UI
 
@@ -28,16 +29,13 @@ Item {
   implicitWidth: contentWidth
   implicitHeight: contentHeight
 
-  function buildCmd(value) {
-    var parts = ["nvibrant"]
-    for (var i = 0; i < root.displayIndex; i++)
-      parts.push("0")
-    parts.push(value.toString())
-    return ["bash", "-lc", parts.join(" ")]
+  VibranceRunner {
+    id: runner
+    pluginApi: root.pluginApi
   }
 
   function applyVibrance(value) {
-    Quickshell.execDetached(buildCmd(value))
+    runner.apply(value, root.displayIndex)
   }
 
   function toggle() {
@@ -56,7 +54,7 @@ Item {
     width: root.contentWidth
     height: root.contentHeight
     radius: Style.radiusL
-    color: mouseArea.containsMouse ? Color.mHover : Style.capsuleColor
+    color: mouseArea.containsMouse ? NC.Color.mHover : Style.capsuleColor
     border.color: Style.capsuleBorderColor
     border.width: Style.capsuleBorderWidth
 
@@ -65,8 +63,8 @@ Item {
       icon: "contrast"
       applyUiScale: false
       color: root.vibrantEnabled
-        ? Color.mPrimary
-        : (mouseArea.containsMouse ? Color.mOnHover : Color.mOnSurface)
+        ? NC.Color.mPrimary
+        : (mouseArea.containsMouse ? NC.Color.mOnHover : NC.Color.mOnSurface)
     }
   }
 

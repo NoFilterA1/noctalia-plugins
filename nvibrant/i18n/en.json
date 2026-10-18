@@ -9,5 +9,13 @@
     "enable-vibrance": "Enable Vibrance",
     "disable-vibrance": "Disable Vibrance",
     "settings": "Settings"
+  },
+  "toast": {
+    "no-nvidia-title": "NVibrant: no display to apply to",
+    "no-nvidia-desc": "No connected display found.",
+    "failed-title": "NVibrant failed",
+    "failed-desc": "nvibrant returned an error. Check the display port index in plugin settings.",
+    "no-ctm-title": "NVibrant: niri has no color-matrix",
+    "no-ctm-desc": "The laptop panel needs niri with the color-matrix output action (niri PR #4543). Install the niri-ctm package and restart the session."
   }
 }

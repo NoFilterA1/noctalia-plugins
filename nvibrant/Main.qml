@@ -14,16 +14,13 @@ Item {
   // stored 1-based (1 = port 0), converted on use
   readonly property int displayIndex: (cfg.displayIndex ?? defaults.displayIndex ?? 1) - 1
 
-  function buildCmd(value) {
-    var parts = ["nvibrant"]
-    for (var i = 0; i < root.displayIndex; i++)
-      parts.push("0")
-    parts.push(value.toString())
-    return ["bash", "-lc", parts.join(" ")]
+  VibranceRunner {
+    id: runner
+    pluginApi: root.pluginApi
   }
 
   function applyVibrance(value) {
-    Quickshell.execDetached(buildCmd(value))
+    runner.apply(value, root.displayIndex)
   }
 
   function toggle() {
