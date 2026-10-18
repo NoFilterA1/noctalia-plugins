@@ -103,13 +103,14 @@ How it behaves: the matrix is a standard saturation matrix (Rec. 709 luma weight
 
 ## Installation
 
-Install via the Noctalia plugin manager, or manually:
+This plugin targets **Noctalia v4** (QML plugins). The official `noctalia-plugins` repository is archived and the v5 plugin system uses a different format (Luau), so install it manually:
 
 ```bash
-git clone https://github.com/noctalia-dev/noctalia-plugins ~/.config/noctalia/plugins/nvibrant
+git clone --branch feat/nvibrant-non-nvidia-outputs https://github.com/NoFilterA1/noctalia-plugins /tmp/noctalia-plugins
+cp -r /tmp/noctalia-plugins/nvibrant ~/.config/noctalia/plugins/
 ```
 
-*Note: If cloning manually, ensure the `nvibrant` folder is located directly inside your plugins directory.*
+The `nvibrant` folder must sit directly inside `~/.config/noctalia/plugins/`.
 
 Then enable the plugin and add the bar widget in Noctalia Settings.
 
@@ -117,9 +118,11 @@ Then enable the plugin and add the bar widget in Noctalia Settings.
 
 | Action | Result |
 |---|---|
-| Left click | Toggle vibrance on/off |
-| Right click | Context menu (toggle + settings) |
+| Left click on the widget | Open the panel: level slider, on/off button, settings |
+| Right click on the widget | Toggle vibrance on/off |
 | IPC | `qs -c noctalia-shell ipc call plugin:nvibrant toggle` |
+
+Dragging the slider previews the level live while vibrance is on; the level is saved when you release it.
 
 ## Settings
 

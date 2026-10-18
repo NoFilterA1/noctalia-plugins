@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import qs.Commons
 
 Item {
@@ -21,6 +22,19 @@ Item {
 
   function applyVibrance(value) {
     runner.apply(value, root.displayIndex)
+  }
+
+  function previewLevel(value) {
+    if (vibrantEnabled)
+      applyVibrance(value)
+  }
+
+  function setLevel(value) {
+    if (!pluginApi)
+      return
+    pluginApi.pluginSettings.vibranceValue = value
+    pluginApi.saveSettings()
+    previewLevel(value)
   }
 
   function toggle() {

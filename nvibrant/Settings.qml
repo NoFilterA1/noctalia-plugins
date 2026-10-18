@@ -21,12 +21,24 @@ ColumnLayout {
       description: pluginApi?.tr("settings.vibrance-value-desc")
     }
 
-    NSpinBox {
-      id: vibranceSpinBox
-      from: 0
-      to: 1023
-      stepSize: 64
-      value: root.cfg.vibranceValue ?? root.defaults.vibranceValue ?? 512
+    RowLayout {
+      Layout.fillWidth: true
+      spacing: Style.marginM
+
+      NSlider {
+        id: vibranceSlider
+        Layout.fillWidth: true
+        from: 0
+        to: 1023
+        stepSize: 1
+        value: root.cfg.vibranceValue ?? root.defaults.vibranceValue ?? 512
+      }
+
+      NText {
+        text: Math.round(vibranceSlider.value).toString()
+        Layout.preferredWidth: Style.baseWidgetSize * 1.5 * Style.uiScaleRatio
+        horizontalAlignment: Text.AlignRight
+      }
     }
   }
 
@@ -56,8 +68,13 @@ ColumnLayout {
 
   function saveSettings() {
     if (!pluginApi) return
-    pluginApi.pluginSettings.vibranceValue = vibranceSpinBox.value
+    pluginApi.pluginSettings.vibranceValue = Math.round(vibranceSlider.value)
     pluginApi.pluginSettings.displayIndex  = displayIndexSpinBox.value
     pluginApi.saveSettings()
+
+    // re-apply right away so the new level shows up if vibrance is currently on
+    var main = pluginApi.mainInstance
+    if (main && pluginApi.pluginSettings.enabled)
+      main.applyVibrance(pluginApi.pluginSettings.vibranceValue)
   }
 }

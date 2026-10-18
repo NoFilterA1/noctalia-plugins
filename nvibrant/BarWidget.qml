@@ -29,24 +29,6 @@ Item {
   implicitWidth: contentWidth
   implicitHeight: contentHeight
 
-  VibranceRunner {
-    id: runner
-    pluginApi: root.pluginApi
-  }
-
-  function applyVibrance(value) {
-    runner.apply(value, root.displayIndex)
-  }
-
-  function toggle() {
-    if (pluginApi) {
-      var newEnabled = !vibrantEnabled
-      pluginApi.pluginSettings.enabled = newEnabled
-      pluginApi.saveSettings()
-      applyVibrance(newEnabled ? vibranceValue : 0)
-    }
-  }
-
   Rectangle {
     id: visualCapsule
     x: Style.pixelAlignCenter(parent.width, width)
@@ -68,33 +50,6 @@ Item {
     }
   }
 
-  NPopupContextMenu {
-    id: contextMenu
-    model: [
-      {
-        "label": root.vibrantEnabled
-          ? pluginApi?.tr("panel.disable-vibrance")
-          : pluginApi?.tr("panel.enable-vibrance"),
-        "action": "toggle",
-        "icon": root.vibrantEnabled ? "eye-off" : "eye"
-      },
-      {
-        "label": pluginApi?.tr("panel.settings"),
-        "action": "widget-settings",
-        "icon": "settings"
-      }
-    ]
-    onTriggered: action => {
-      contextMenu.close()
-      PanelService.closeContextMenu(screen)
-      if (action === "toggle") {
-        root.toggle()
-      } else if (action === "widget-settings") {
-        BarService.openPluginSettings(screen, pluginApi.manifest)
-      }
-    }
-  }
-
   MouseArea {
     id: mouseArea
     anchors.fill: parent
@@ -104,9 +59,9 @@ Item {
 
     onClicked: (mouse) => {
       if (mouse.button === Qt.LeftButton) {
-        root.toggle()
+        pluginApi?.togglePanel(root.screen, root)
       } else if (mouse.button === Qt.RightButton) {
-        PanelService.showContextMenu(contextMenu, root, screen)
+        pluginApi?.mainInstance?.toggle()
       }
     }
   }

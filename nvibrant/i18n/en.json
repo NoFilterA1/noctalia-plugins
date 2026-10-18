@@ -8,7 +8,8 @@
   "panel": {
     "enable-vibrance": "Enable Vibrance",
     "disable-vibrance": "Disable Vibrance",
-    "settings": "Settings"
+    "settings": "Settings",
+    "title": "NVibrant"
   },
   "toast": {
     "no-nvidia-title": "NVibrant: no display to apply to",
