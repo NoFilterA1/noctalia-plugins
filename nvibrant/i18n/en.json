@@ -2,8 +2,8 @@
   "settings": {
     "vibrance-value": "Vibrance Level",
     "vibrance-value-desc": "Digital vibrance intensity (0 = default, 1023 = maximum saturation)",
-    "display-index": "Display Port Index",
-    "display-index-desc": "Display number (1 = first port). Run 'nvibrant' to find which number shows 'Success'"
+    "display-index": "Display Port",
+    "display-index-desc": "0 = all ports (recommended). Otherwise the nvibrant port to use, 1 = first. Run 'nvibrant' to see which port says 'Success'"
   },
   "panel": {
     "enable-vibrance": "Enable Vibrance",

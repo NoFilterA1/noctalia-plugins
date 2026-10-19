@@ -59,10 +59,10 @@ ColumnLayout {
 
     NSpinBox {
       id: displayIndexSpinBox
-      from: 1
+      from: 0
       to: 8
       stepSize: 1
-      value: root.cfg.displayIndex ?? root.defaults.displayIndex ?? 1
+      value: root.cfg.displayIndex ?? root.defaults.displayIndex ?? 0
     }
   }
 

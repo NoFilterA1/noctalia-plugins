@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# usage: apply.sh <vibrance 0-1023> <nvibrant-port-index (0-based)>
+# usage: apply.sh <vibrance 0-1023> <nvibrant-port-index (0-based), -1 = all ports>
 # exit: 0 ok, 3 no usable display, 4 nvibrant failed, 5 niri has no color-matrix support, 6 niri color-matrix command failed
 value=${1:-0}
 idx=${2:-0}
@@ -8,7 +8,9 @@ nv_done=0 ctm_done=0 nv_found=0 ctm_found=0 err=0
 
 for c in /sys/class/drm/card*-*; do
   [ "$(cat "$c/status" 2>/dev/null)" = connected ] || continue
-  drv=$(basename "$(readlink -f "$c/device/driver" 2>/dev/null)")
+  # a connector's `device` points at its cardN, which holds the driver link
+  card=${c#/sys/class/drm/}; card=${card%%-*}
+  drv=$(basename "$(readlink -f "/sys/class/drm/$card/device/driver" 2>/dev/null)")
   name=${c#/sys/class/drm/card*-}
   if [ "$drv" = nvidia ]; then
     nv_found=1
@@ -20,8 +22,14 @@ done
 
 if [ $nv_found = 1 ]; then
   args=()
-  for ((i = 0; i < idx; i++)); do args+=(0); done
-  nvibrant "${args[@]}" "$value" >/dev/null 2>&1 && nv_done=1 || err=4
+  if [ "$idx" -lt 0 ]; then
+    # one value per port; nvibrant ignores ports without a display and extra values
+    for ((i = 0; i < 16; i++)); do args+=("$value"); done
+  else
+    for ((i = 0; i < idx; i++)); do args+=(0); done
+    args+=("$value")
+  fi
+  nvibrant "${args[@]}" >/dev/null 2>&1 && nv_done=1 || err=4
 fi
 
 if [ $ctm_found = 1 ]; then

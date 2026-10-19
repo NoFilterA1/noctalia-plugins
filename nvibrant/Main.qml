@@ -12,8 +12,8 @@ Item {
 
   readonly property bool vibrantEnabled: cfg.enabled ?? defaults.enabled ?? false
   readonly property int vibranceValue: cfg.vibranceValue ?? defaults.vibranceValue ?? 512
-  // stored 1-based (1 = port 0), converted on use
-  readonly property int displayIndex: (cfg.displayIndex ?? defaults.displayIndex ?? 1) - 1
+  // stored 1-based (1 = port 0, 0 = all ports), converted on use
+  readonly property int displayIndex: (cfg.displayIndex ?? defaults.displayIndex ?? 0) - 1
 
   VibranceRunner {
     id: runner

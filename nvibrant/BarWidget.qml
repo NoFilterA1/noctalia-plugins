@@ -21,7 +21,7 @@ Item {
 
   readonly property bool vibrantEnabled: cfg.enabled ?? defaults.enabled ?? false
   readonly property int vibranceValue: cfg.vibranceValue ?? defaults.vibranceValue ?? 512
-  readonly property int displayIndex: (cfg.displayIndex ?? defaults.displayIndex ?? 1) - 1
+  readonly property int displayIndex: (cfg.displayIndex ?? defaults.displayIndex ?? 0) - 1
 
   readonly property real contentWidth: Style.capsuleHeight
   readonly property real contentHeight: Style.capsuleHeight

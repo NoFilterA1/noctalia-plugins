@@ -129,7 +129,7 @@ Dragging the slider previews the level live while vibrance is on; the level is s
 | Setting | Default | Description |
 |---|---|---|
 | Vibrance Level | 512 | Intensity: 0 = default, 1023 = maximum saturation (~200%) |
-| Display Port Index | 1 | Which `nvibrant` port to apply to (1 = first). Only used for NVIDIA displays; `nvibrant` prints the ports it sees when run without arguments |
+| Display Port | 0 | 0 = apply to all `nvibrant` ports (default). Otherwise the port to use (1 = first). Only used for NVIDIA displays |
 
 ## License
 
